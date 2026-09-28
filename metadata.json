@@ -1,0 +1,8 @@
+{
+  "name": "Petal & Twist - Handmade Pipe-Cleaner Florals",
+  "description": "Everlasting handmade pipe-cleaner flower bouquets, potted botanical creations, and custom keychains crafted with love.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
