@@ -1,13 +1,14 @@
 import React from 'react';
-import { ArrowDown, MessageCircle, Heart, Sparkles, ShieldCheck } from 'lucide-react';
+import { ArrowDown, MessageCircle, Heart, Sparkles, ShieldCheck, Bot } from 'lucide-react';
 import { heroBouquetImg, WHATSAPP_NUMBER } from '../data/products';
 
 interface HeroProps {
   onExploreClick: () => void;
   onCustomClick: () => void;
+  onAiChatClick?: () => void;
 }
 
-export const Hero: React.FC<HeroProps> = ({ onExploreClick, onCustomClick }) => {
+export const Hero: React.FC<HeroProps> = ({ onExploreClick, onCustomClick, onAiChatClick }) => {
   return (
     <section id="home" className="relative overflow-hidden pt-8 pb-16 md:pt-14 md:pb-24 bg-gradient-to-b from-[#FFFDF9] via-[#FAF5EE] to-[#FFFDF9]">
       {/* Subtle organic floral background glow circles */}
@@ -67,8 +68,19 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onCustomClick }) => 
                 onClick={onCustomClick}
                 className="px-6 py-3.5 text-sm font-semibold text-[#83383F] bg-[#FCECEE] hover:bg-[#F9DEE2] border border-[#F2C7CD] rounded-full transition-colors cursor-pointer"
               >
-                Custom Order Studio
+                Custom Studio
               </button>
+
+              {onAiChatClick && (
+                <button
+                  onClick={onAiChatClick}
+                  className="px-5 py-3.5 text-sm font-semibold text-[#8A3A40] bg-[#FAF5EE] hover:bg-[#F5EFE6] border border-[#E8E0D2] rounded-full transition-colors cursor-pointer inline-flex items-center gap-2"
+                  title="Ask our n8n AI Assistant"
+                >
+                  <Bot className="w-4 h-4 text-[#D9777F]" />
+                  <span>Ask AI Agent</span>
+                </button>
+              )}
 
               <a
                 href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hi KN Crafts & Co! 🌸 I would like to order some handmade pipe-cleaner flowers.')}`}
@@ -77,7 +89,7 @@ export const Hero: React.FC<HeroProps> = ({ onExploreClick, onCustomClick }) => 
                 className="px-5 py-3.5 text-sm font-semibold text-[#14532D] bg-[#DCFCE7] hover:bg-[#BBF7D0] rounded-full transition-colors inline-flex items-center gap-2"
               >
                 <MessageCircle className="w-4 h-4 fill-current" />
-                <span>WhatsApp Order</span>
+                <span>WhatsApp</span>
               </a>
             </div>
 

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { MessageCircle, Mail, MapPin, Clock, ChevronDown, Send, CheckCircle2, Phone, Wind, Sun, Droplets, RotateCcw, Sparkles } from 'lucide-react';
+import { MessageCircle, Mail, MapPin, Clock, ChevronDown, Send, CheckCircle2, Phone, Wind, Sun, Droplets, RotateCcw, Sparkles, Bot } from 'lucide-react';
 import { WHATSAPP_NUMBER, WHATSAPP_DISPLAY, SHOP_EMAIL, INSTAGRAM_HANDLE } from '../data/products';
 
-export const ContactSection: React.FC = () => {
+interface ContactSectionProps {
+  onOpenAiChat?: () => void;
+}
+
+export const ContactSection: React.FC<ContactSectionProps> = ({ onOpenAiChat }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -199,6 +203,28 @@ export const ContactSection: React.FC = () => {
                 <span>Open WhatsApp Chat ({WHATSAPP_DISPLAY})</span>
               </a>
             </div>
+
+            {/* AI Assistant Instant Card */}
+            {onOpenAiChat && (
+              <div className="p-4 rounded-2xl bg-[#FDF2F4] border border-[#F2C7CD] flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-xl bg-[#D9777F] text-white flex items-center justify-center shrink-0">
+                    <Bot className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-xs text-[#2C2420]">24/7 AI Craft Assistant</div>
+                    <div className="text-[11px] text-[#786B63]">Instant answers on bouquets & flower care</div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={onOpenAiChat}
+                  className="px-3.5 py-1.5 bg-[#D9777F] hover:bg-[#C9636B] text-white text-xs font-semibold rounded-xl transition-colors cursor-pointer shrink-0"
+                >
+                  Chat with AI
+                </button>
+              </div>
+            )}
 
             {/* Studio Contact Cards */}
             <div className="space-y-3.5">

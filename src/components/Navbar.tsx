@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
-import { ShoppingBag, MessageCircle, Menu, X, Sparkles } from 'lucide-react';
+import { ShoppingBag, MessageCircle, Menu, X, Sparkles, Bot } from 'lucide-react';
 import { WHATSAPP_NUMBER } from '../data/products';
 
 interface NavbarProps {
   cartCount: number;
   onOpenCart: () => void;
   onOpenCustomOrder: () => void;
+  onOpenAiChat?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   cartCount,
   onOpenCart,
   onOpenCustomOrder,
+  onOpenAiChat,
 }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -58,7 +60,19 @@ export const Navbar: React.FC<NavbarProps> = ({
         </nav>
 
         {/* Zone 3: 1-2 primary actions */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2.5">
+          {/* AI Chat button */}
+          {onOpenAiChat && (
+            <button
+              onClick={onOpenAiChat}
+              className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-[#8A3A40] bg-[#FDF2F4] hover:bg-[#FCE7F3] border border-[#F2C7CD] rounded-full transition-colors cursor-pointer"
+              title="Chat with our n8n AI Assistant"
+            >
+              <Bot className="w-3.5 h-3.5 text-[#D9777F]" />
+              <span>Ask AI</span>
+            </button>
+          )}
+
           {/* WhatsApp Direct Action Button */}
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hi KN Crafts & Co! 🌸 I am browsing your lovely handmade creations and would like to ask a question.')}`}
@@ -111,6 +125,18 @@ export const Navbar: React.FC<NavbarProps> = ({
               </a>
             ))}
             <div className="pt-2 border-t border-[#EFE9DF] flex flex-col gap-2">
+              {onOpenAiChat && (
+                <button
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    onOpenAiChat();
+                  }}
+                  className="w-full text-center py-2.5 px-4 text-sm font-semibold text-[#8A3A40] bg-[#FDF2F4] border border-[#F2C7CD] rounded-xl transition-colors flex items-center justify-center gap-2"
+                >
+                  <Bot className="w-4 h-4 text-[#D9777F]" />
+                  Chat with AI Assistant
+                </button>
+              )}
               <button
                 onClick={() => {
                   setMobileMenuOpen(false);

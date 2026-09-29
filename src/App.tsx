@@ -11,6 +11,7 @@ import { ContactSection } from './components/ContactSection';
 import { ProductDetailModal } from './components/ProductDetailModal';
 import { CartDrawer } from './components/CartDrawer';
 import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
+import { N8nChatWidget } from './components/N8nChatWidget';
 import { Footer } from './components/Footer';
 import { CheckCircle2 } from 'lucide-react';
 
@@ -25,6 +26,7 @@ export default function App() {
   });
 
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isAiChatOpen, setIsAiChatOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
 
@@ -125,6 +127,7 @@ export default function App() {
         cartCount={totalCartCount}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenCustomOrder={() => scrollToSection('custom-orders')}
+        onOpenAiChat={() => setIsAiChatOpen(true)}
       />
 
       {/* Main Content Sections */}
@@ -133,6 +136,7 @@ export default function App() {
         <Hero
           onExploreClick={() => scrollToSection('products')}
           onCustomClick={() => scrollToSection('custom-orders')}
+          onAiChatClick={() => setIsAiChatOpen(true)}
         />
 
         {/* 2. About Us Section */}
@@ -152,7 +156,7 @@ export default function App() {
         <CustomOrderSection />
 
         {/* 6. Contact/Order Section */}
-        <ContactSection />
+        <ContactSection onOpenAiChat={() => setIsAiChatOpen(true)} />
       </main>
 
       {/* Footer */}
@@ -175,8 +179,15 @@ export default function App() {
         onClearCart={handleClearCart}
       />
 
-      {/* Floating WhatsApp Quick Action */}
-      <WhatsAppFloatingButton />
+      {/* Floating Action Button (WhatsApp + AI Assistant) */}
+      <WhatsAppFloatingButton onOpenAiChat={() => setIsAiChatOpen(true)} />
+
+      {/* n8n AI Chat Assistant Modal Widget */}
+      <N8nChatWidget
+        isOpen={isAiChatOpen}
+        onClose={() => setIsAiChatOpen(false)}
+        onOpen={() => setIsAiChatOpen(true)}
+      />
     </div>
   );
 }
